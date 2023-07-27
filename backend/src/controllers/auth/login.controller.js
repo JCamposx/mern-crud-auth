@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 
 import { createAccessToken } from "../../libs/jwt.js";
+import { returnErrorJson, returnSuccessJson } from "../../libs/responseJson.js";
 import User from "../../models/user.model.js";
 
 const login = async (req, res) => {
@@ -15,17 +16,14 @@ const login = async (req, res) => {
 
     res.cookie("token", token);
 
-    res.json({
-      success: true,
-      items: {
-        user: {
-          id: user._id,
-          username: user.username,
-          email: user.email,
-          createdAt: user.createdAt,
-          updatedAt: user.updatedAt,
-          token,
-        },
+    returnSuccessJson(res, {
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        token,
       },
     });
   };
@@ -59,14 +57,7 @@ const login = async (req, res) => {
   try {
     await loginUser();
   } catch (error) {
-    const errorStatus = error.status ?? 500;
-
-    res.status(errorStatus).json({
-      success: false,
-      items: {
-        error: error.message,
-      },
-    });
+    returnErrorJson(res, error);
   }
 };
 
