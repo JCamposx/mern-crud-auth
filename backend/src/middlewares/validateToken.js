@@ -1,9 +1,7 @@
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
+import { TOKEN_SECRET } from "../config.js";
 import { responseErrorJson } from "../libs/responseJson.js";
-
-dotenv.config();
 
 const validateToken = (req, res, next) => {
   const { token } = req.cookies;
@@ -16,8 +14,6 @@ const validateToken = (req, res, next) => {
 
     return;
   }
-
-  const TOKEN_SECRET = process.env.TOKEN_SECRET || "secret";
 
   jwt.verify(token, TOKEN_SECRET, (error, user) => {
     if (error) {
