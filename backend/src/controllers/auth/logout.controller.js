@@ -1,11 +1,11 @@
-import { returnSuccessJson } from "../../libs/responseJson.js";
+import { responseSuccessJson } from "../../libs/responseJson.js";
 
 const logout = async (req, res) => {
   res.cookie("token", "", {
     expires: new Date(0),
   });
 
-  returnSuccessJson(res);
+  responseSuccessJson(res);
 };
 
 export default logout;

@@ -1,4 +1,4 @@
-export const returnSuccessJson = (res, data) => {
+export const responseSuccessJson = (res, data) => {
   res.json({
     success: true,
     items: {
@@ -7,7 +7,7 @@ export const returnSuccessJson = (res, data) => {
   });
 };
 
-export const returnErrorJson = (res, error) => {
+export const responseErrorJson = (res, error) => {
   const errorStatus = error.status ?? 500;
 
   res.status(errorStatus).json({
