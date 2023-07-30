@@ -1,11 +1,20 @@
-import { API_URL } from "./config.js";
-
 export const routes = {
   api: {
     auth: {
-      register: API_URL + "/auth/register",
-      login: API_URL + "/auth/login",
-      logout: API_URL + "/auth/logout",
+      register: "/auth/register",
+      login: "/auth/login",
+      logout: "/auth/logout",
     },
   },
+};
+
+export const url = (route, params = null) => {
+  if (!params) {
+    return route;
+  }
+
+  return route.replace(
+    /:\w+/g,
+    (paramName) => params[paramName.substring(1)] || paramName
+  );
 };

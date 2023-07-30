@@ -1,18 +1,15 @@
 import { useForm } from "react-hook-form";
-import axios from "axios";
 
+import api from "../../utils/api.js";
+import { TYPE_FETCHING } from "../../utils/constants.js";
 import { routes } from "../../utils/routes.js";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit(async (values) => {
-    try {
-      const res = await axios.post(routes.api.auth.register, values);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await api(routes.api.auth.register, TYPE_FETCHING.post, values);
+    console.log(res);
   });
 
   return (
