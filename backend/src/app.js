@@ -1,13 +1,19 @@
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 
-import { PORT } from "./config.js";
+import { FRONTEND_URL, PORT } from "./config.js";
 import authRoutes from "./routes/auth.routes.js";
 import routes from "./routes/index.routes.js";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
