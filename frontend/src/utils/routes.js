@@ -6,6 +6,7 @@ export const routes = {
       logout: "/auth/logout",
     },
   },
+  home: "/",
 };
 
 export const url = (route, params = null) => {
