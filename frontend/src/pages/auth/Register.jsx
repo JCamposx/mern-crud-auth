@@ -1,14 +1,12 @@
 import { useForm } from "react-hook-form";
 
-import api from "../../utils/api.js";
-import { TYPE_FETCHING } from "../../utils/constants.js";
-import { routes } from "../../utils/routes.js";
+import registerRequest from "../../api/auth/register.js";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit(async (values) => {
-    const res = await api(routes.api.auth.register, TYPE_FETCHING.post, values);
+    const res = await registerRequest(values);
     console.log(res);
   });
 
