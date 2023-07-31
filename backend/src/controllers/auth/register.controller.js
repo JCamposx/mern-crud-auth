@@ -11,6 +11,20 @@ const register = async (req, res) => {
   const registerUser = async () => {
     const { username, email, password } = req.body;
 
+    const usernameValidation = await checkUserWithUsernameExists(username);
+
+    const emailValidation = await checkUserWithEmailExists(email);
+
+    if (!usernameValidation.success || !emailValidation.success) {
+      throw {
+        status: 400,
+        message: [
+          usernameValidation.message && usernameValidation.message,
+          emailValidation.message && emailValidation.message,
+        ].filter((message) => message ?? false),
+      };
+    }
+
     const user = await createUser({ username, email, password });
 
     const token = await createAccessToken({ id: user._id });
@@ -27,6 +41,32 @@ const register = async (req, res) => {
         token,
       },
     });
+  };
+
+  const checkUserWithUsernameExists = async (username) => {
+    const user = await User.findOne({ username });
+
+    if (user) {
+      return {
+        success: false,
+        message: "Username is already taken",
+      };
+    }
+
+    return { success: true };
+  };
+
+  const checkUserWithEmailExists = async (email) => {
+    const user = await User.findOne({ email });
+
+    if (user) {
+      return {
+        success: false,
+        message: "Email is already taken",
+      };
+    }
+
+    return { success: true };
   };
 
   const createUser = async (data) => {
