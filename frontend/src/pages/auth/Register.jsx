@@ -69,7 +69,10 @@ const Register = () => {
             <p className="text-red-500">Password is required</p>
           )}
 
-          <button type="submit" className="mt-4">
+          <button
+            type="submit"
+            className="w-full bg-purple-700 rounded-md py-1 mt-4"
+          >
             Register
           </button>
 
