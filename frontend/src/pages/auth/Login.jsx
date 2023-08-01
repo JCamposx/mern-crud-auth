@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
+import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
-import { routes } from "../../utils/routes.js";
+import { routes, url } from "../../utils/routes.js";
 
 const Login = () => {
   const { isAuthenticated, signin, errors: loginErrors } = useAuth();
@@ -61,6 +62,13 @@ const Login = () => {
           <button type="submit" className="mt-4">
             Login
           </button>
+
+          <p className="flex justify-between mt-4">
+            Don&apos;t have an account?
+            <Link to={url(routes.register)} className="text-sky-500">
+              Sign up
+            </Link>
+          </p>
         </form>
       </div>
     </div>

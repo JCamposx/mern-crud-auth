@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
+import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
-import { routes } from "../../utils/routes.js";
+import { routes, url } from "../../utils/routes.js";
 
 const Register = () => {
   const { isAuthenticated, signup, errors: registerErrors } = useAuth();
@@ -71,6 +72,13 @@ const Register = () => {
           <button type="submit" className="mt-4">
             Register
           </button>
+
+          <p className="flex justify-between mt-4">
+            Already have an account?
+            <Link to={url(routes.login)} className="text-sky-500">
+              Sign in
+            </Link>
+          </p>
         </form>
       </div>
     </div>
