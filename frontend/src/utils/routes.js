@@ -6,6 +6,8 @@ export const routes = {
       logout: "/auth/logout",
     },
   },
+  register: "/register",
+  login: "/login",
   home: "/",
 };
 
