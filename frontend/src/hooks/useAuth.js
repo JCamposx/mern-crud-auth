@@ -21,6 +21,11 @@ const useAuth = () => {
       dispatch(signupReducer(response.data));
     } else {
       setErrors(response.errors);
+
+      const timer = setTimeout(() => {
+        setErrors([]);
+        clearTimeout(timer);
+      }, 5000);
     }
   };
 
@@ -31,6 +36,11 @@ const useAuth = () => {
       dispatch(signinReducer(response.data));
     } else {
       setErrors(response.errors);
+
+      const timer = setTimeout(() => {
+        setErrors([]);
+        clearTimeout(timer);
+      }, 5000);
     }
   };
 

@@ -31,7 +31,7 @@ const Login = () => {
       <div className="bg-zinc-800 w-96 p-10 rounded-md">
         <h1 className="text-2xl font-bold mb-2">Login</h1>
 
-        {loginErrors && (
+        {loginErrors && loginErrors.length > 0 && (
           <div className="bg-red-500 p-2 text-white rounded-md">
             {loginErrors.map((error, index) => (
               <p key={index}>{`- ${error}`}</p>
