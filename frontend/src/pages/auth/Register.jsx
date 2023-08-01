@@ -27,50 +27,52 @@ const Register = () => {
   });
 
   return (
-    <div className="bg-zinc-800 max-w-md p-10 rounded-md">
-      {registerErrors && (
-        <div className="bg-red-500 p-2 text-white rounded-md">
-          {registerErrors.map((error, index) => (
-            <p key={index}>
-              {`- ${error}`}
-            </p>
-          ))}
-        </div>
-      )}
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-zinc-800 w-96 p-10 rounded-md">
+        <h1 className="text-2xl font-bold mb-2">Register</h1>
 
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          {...register("username", { required: true })}
-          className="w-full bg-zinc-700 text-white px-4 py-2 mt-4 rounded-md"
-        />
-        {errors.username && (
-          <p className="text-red-500">Username is required</p>
+        {registerErrors && (
+          <div className="bg-red-500 p-2 text-white rounded-md">
+            {registerErrors.map((error, index) => (
+              <p key={index}>{`- ${error}`}</p>
+            ))}
+          </div>
         )}
 
-        <input
-          type="text"
-          placeholder="Email"
-          {...register("email", { required: true })}
-          className="w-full bg-zinc-700 text-white px-4 py-2 mt-4 rounded-md"
-        />
-        {errors.email && <p className="text-red-500">Email is required</p>}
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            {...register("username", { required: true })}
+            className="w-full bg-zinc-700 text-white px-4 py-2 mt-4 rounded-md"
+          />
+          {errors.username && (
+            <p className="text-red-500">Username is required</p>
+          )}
 
-        <input
-          type="password"
-          placeholder="Password"
-          {...register("password", { required: true })}
-          className="w-full bg-zinc-700 text-white px-4 py-2 mt-4 rounded-md"
-        />
-        {errors.password && (
-          <p className="text-red-500">Password is required</p>
-        )}
+          <input
+            type="text"
+            placeholder="Email"
+            {...register("email", { required: true })}
+            className="w-full bg-zinc-700 text-white px-4 py-2 mt-4 rounded-md"
+          />
+          {errors.email && <p className="text-red-500">Email is required</p>}
 
-        <button type="submit" className="mt-4">
-          Register
-        </button>
-      </form>
+          <input
+            type="password"
+            placeholder="Password"
+            {...register("password", { required: true })}
+            className="w-full bg-zinc-700 text-white px-4 py-2 mt-4 rounded-md"
+          />
+          {errors.password && (
+            <p className="text-red-500">Password is required</p>
+          )}
+
+          <button type="submit" className="mt-4">
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
