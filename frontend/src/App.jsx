@@ -4,6 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { persistor, store } from "./utils/store.js";
 
+import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<h1>Home page</h1>} />
             <Route path="*" element={<h1>404 Not found</h1>} />
           </Routes>

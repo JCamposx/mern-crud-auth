@@ -13,9 +13,13 @@ export const userSlice = createSlice({
       state.data = action.payload;
       state.isAuthenticated = true;
     },
+    signin: (state, action) => {
+      state.data = action.payload;
+      state.isAuthenticated = true;
+    },
   },
 });
 
-export const { signup } = userSlice.actions;
+export const { signup, signin } = userSlice.actions;
 
 export default userSlice.reducer;
