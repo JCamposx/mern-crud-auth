@@ -4,6 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { persistor, store } from "./utils/store.js";
 
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import { routes, url } from "./utils/routes.js";
@@ -16,7 +17,11 @@ const App = () => {
           <Routes>
             <Route path={url(routes.register)} element={<Register />} />
             <Route path={url(routes.login)} element={<Login />} />
-            <Route path={url(routes.home)} element={<h1>Home page</h1>} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route path={url(routes.home)} element={<h1>Home page</h1>} />
+            </Route>
+
             <Route path="*" element={<h1>404 Not found</h1>} />
           </Routes>
         </BrowserRouter>
