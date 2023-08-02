@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookie from "js-cookie";
 
 const initialState = {
   data: null,
@@ -12,10 +13,12 @@ export const userSlice = createSlice({
     signup: (state, action) => {
       state.data = action.payload.user;
       state.isAuthenticated = true;
+      Cookie.set("token", action.payload.user.token);
     },
     signin: (state, action) => {
       state.data = action.payload.user;
       state.isAuthenticated = true;
+      Cookie.set("token", action.payload.user.token);
     },
   },
 });
