@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 
-import { TOKEN_SECRET } from "../config.js";
-import { responseErrorJson } from "../libs/responseJson.js";
+import { TOKEN_SECRET } from "../../config.js";
+import { responseErrorJson, responseSuccessJson } from "../../libs/responseJson.js";
 
-const validateToken = (req, res, next) => {
+const verifyToken = (req, res) => {
   const { token } = req.cookies;
 
   if (!token) {
@@ -24,11 +24,9 @@ const validateToken = (req, res, next) => {
 
       return;
     }
-
-    req.user = user;
   });
 
-  next();
+  responseSuccessJson(res);
 };
 
-export default validateToken;
+export default verifyToken;
