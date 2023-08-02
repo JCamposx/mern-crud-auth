@@ -6,10 +6,16 @@ export const routes = {
       logout: "/auth/logout",
       verifyToken: "/auth/verify-token",
     },
+    tasks: {
+      index: "/tasks",
+    },
   },
   register: "/register",
   login: "/login",
   home: "/",
+  tasks: {
+    index: "/tasks",
+  },
 };
 
 export const url = (route, params = null) => {

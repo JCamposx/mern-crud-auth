@@ -21,6 +21,7 @@ const App = () => {
 
             <Route element={<ProtectedRoute />}>
               <Route path={url(routes.home)} element={<Home />} />
+              <Route path={url(routes.tasks.index)} element={<>Tasks index page</>} />
               <Route path="*" element={<h1>404 Not found</h1>} />
             </Route>
           </Routes>
