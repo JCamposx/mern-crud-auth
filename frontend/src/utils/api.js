@@ -1,12 +1,10 @@
-import axios from "axios";
-
-import { API_URL } from "./config.js";
+import axios from "./axios.js";
 import { TYPE_FETCHING } from "./constants.js";
 
 const api = (path, type = TYPE_FETCHING.get, data = null) => {
   const handleRequest = async (axiosFunction) => {
     try {
-      const response = await axiosFunction(API_URL + path, data);
+      const response = await axiosFunction(path, data);
 
       return {
         success: true,
