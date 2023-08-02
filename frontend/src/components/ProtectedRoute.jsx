@@ -16,7 +16,11 @@ const ProtectedRoute = () => {
     return <Navigate to={url(routes.login)} replace />;
   }
 
-  return <Outlet />;
+  return (
+    <div className="mx-auto max-w-7xl px-0 max-sm:px-4 sm:px-6 md:px-8 lg:px-10">
+      <Outlet />
+    </div>
+  );
 };
 
 export default ProtectedRoute;
