@@ -20,9 +20,14 @@ export const userSlice = createSlice({
       state.isAuthenticated = true;
       Cookie.set("token", action.payload.user.token);
     },
+    logout: (state) => {
+      state.data = null;
+      state.isAuthenticated = false;
+      Cookie.remove("token");
+    },
   },
 });
 
-export const { signup, signin } = userSlice.actions;
+export const { signup, signin, logout } = userSlice.actions;
 
 export default userSlice.reducer;

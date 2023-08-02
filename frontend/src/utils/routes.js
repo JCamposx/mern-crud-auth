@@ -4,6 +4,7 @@ export const routes = {
       register: "/auth/register",
       login: "/auth/login",
       logout: "/auth/logout",
+      verifyToken: "/auth/verify-token",
     },
   },
   register: "/register",

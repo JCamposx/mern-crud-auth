@@ -21,9 +21,8 @@ const App = () => {
 
             <Route element={<ProtectedRoute />}>
               <Route path={url(routes.home)} element={<Home />} />
+              <Route path="*" element={<h1>404 Not found</h1>} />
             </Route>
-
-            <Route path="*" element={<h1>404 Not found</h1>} />
           </Routes>
         </BrowserRouter>
       </PersistGate>
