@@ -1,19 +1,32 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import {
   getAllTasks as getAllTasksRequest,
   storeTask as storeTaskRequest,
 } from "../api/tasks.js";
+import { setMessage } from "../features/flashMessage/flashMessageSlice.js";
 
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [errors, setErrors] = useState([]);
+
+  const dispatch = useDispatch();
 
   const setErrorsWithTimeout = (newErrors, seconds) => {
     setErrors(newErrors);
 
     const timer = setTimeout(() => {
       setErrors([]);
+      clearTimeout(timer);
+    }, seconds * 1000);
+  };
+
+  const dispatchFlashMessageWithTimeout = (message, seconds) => {
+    dispatch(setMessage(message));
+
+    const timer = setTimeout(() => {
+      dispatch(setMessage(null));
       clearTimeout(timer);
     }, seconds * 1000);
   };
@@ -46,7 +59,9 @@ const useTasks = () => {
 
     const response = await storeTaskRequest(data);
 
-    if (!response.success) {
+    if (response.success) {
+      dispatchFlashMessageWithTimeout("Task created successfully", 5);
+    } else {
       setErrorsWithTimeout(response.errors, 5);
     }
 

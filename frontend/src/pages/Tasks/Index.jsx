@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import { useSelector } from "react-redux";
 import TaskCard from "../../components/Tasks/TaskCard.jsx";
 import { ButtonLink, Header } from "../../components/ui/index.js";
 import useTasks from "../../hooks/useTasks.js";
@@ -8,6 +9,8 @@ import { routes, url } from "../../utils/routes.js";
 
 const TasksIndex = () => {
   const { tasks, errors, getAllTasks } = useTasks();
+
+  const flashMessage = useSelector((state) => state.flashMessage.message);
 
   useEffect(() => {
     getAllTasks();
@@ -25,6 +28,14 @@ const TasksIndex = () => {
           New
         </ButtonLink>
       </div>
+
+      {flashMessage && (
+        <div
+          className={`${BACKGROUND_COLOR_TYPES.primary} p-3 rounded-md mb-6`}
+        >
+          {flashMessage}
+        </div>
+      )}
 
       {errors.length > 0 && (
         <div className="bg-red-500 p-2 rounded-md mb-6">

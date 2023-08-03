@@ -11,15 +11,18 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import flashMessageReducer from "../features/flashMessage/flashMessageSlice.js";
 import userReducer from "../features/user/userSlice.js";
 
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["flashMessage"],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
+  flashMessage: flashMessageReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
