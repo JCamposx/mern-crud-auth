@@ -6,6 +6,7 @@ import { persistor, store } from "./utils/store.js";
 
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Home from "./pages/Home.jsx";
+import TasksCreate from "./pages/Tasks/Create.jsx";
 import TasksIndex from "./pages/Tasks/Index.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
@@ -23,6 +24,10 @@ const App = () => {
             <Route element={<ProtectedRoute />}>
               <Route path={url(routes.home)} element={<Home />} />
               <Route path={url(routes.tasks.index)} element={<TasksIndex />} />
+              <Route
+                path={url(routes.tasks.create)}
+                element={<TasksCreate />}
+              />
               <Route path="*" element={<h1>404 Not found</h1>} />
             </Route>
           </Routes>

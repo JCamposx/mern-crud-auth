@@ -4,9 +4,10 @@ import TaskCard from "../../components/Tasks/TaskCard.jsx";
 import { ButtonLink, Header } from "../../components/ui/index.js";
 import useTasks from "../../hooks/useTasks.js";
 import { BACKGROUND_COLOR_TYPES } from "../../utils/constants.js";
+import { routes, url } from "../../utils/routes.js";
 
 const TasksIndex = () => {
-  const { tasks, getAllTasks } = useTasks();
+  const { tasks, errors, getAllTasks } = useTasks();
 
   useEffect(() => {
     getAllTasks();
@@ -17,10 +18,21 @@ const TasksIndex = () => {
       <div className="flex justify-between items-center mb-6">
         <Header>My tasks</Header>
 
-        <ButtonLink type={BACKGROUND_COLOR_TYPES.success} to="/tasks/create">
+        <ButtonLink
+          type={BACKGROUND_COLOR_TYPES.success}
+          to={url(routes.tasks.create)}
+        >
           New
         </ButtonLink>
       </div>
+
+      {errors.length > 0 && (
+        <div className="bg-red-500 p-2 rounded-md mb-6">
+          {errors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
 
       {tasks.length === 0 && (
         <div className="flex justify-center items-center p-10">

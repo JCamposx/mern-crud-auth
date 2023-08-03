@@ -8,6 +8,7 @@ export const routes = {
     },
     tasks: {
       index: "/tasks",
+      store: "/tasks/store",
     },
   },
   register: "/register",
@@ -15,6 +16,7 @@ export const routes = {
   home: "/",
   tasks: {
     index: "/tasks",
+    create: "/tasks/create",
   },
 };
 
