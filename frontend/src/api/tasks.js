@@ -8,10 +8,26 @@ export const getAllTasks = async () => {
   return response;
 };
 
+export const getTask = async (id) => {
+  const response = await api(url(routes.api.tasks.show, { id }));
+
+  return response;
+};
+
 export const storeTask = async (data) => {
   const response = await api(
     url(routes.api.tasks.store),
     TYPE_FETCHING.post,
+    data
+  );
+
+  return response;
+};
+
+export const updateTask = async (id, data) => {
+  const response = await api(
+    url(routes.api.tasks.update, { id }),
+    TYPE_FETCHING.put,
     data
   );
 

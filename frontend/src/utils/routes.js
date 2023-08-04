@@ -8,7 +8,9 @@ export const routes = {
     },
     tasks: {
       index: "/tasks",
+      show: "/tasks/:id",
       store: "/tasks/store",
+      update: "/tasks/update/:id",
       delete: "/tasks/:id",
     },
   },
@@ -18,6 +20,7 @@ export const routes = {
   tasks: {
     index: "/tasks",
     create: "/tasks/create",
+    edit: "/tasks/:id",
   },
 };
 

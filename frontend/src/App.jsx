@@ -7,6 +7,7 @@ import { persistor, store } from "./utils/store.js";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Home from "./pages/Home.jsx";
 import TasksCreate from "./pages/Tasks/Create.jsx";
+import TasksEdit from "./pages/Tasks/Edit.jsx";
 import TasksIndex from "./pages/Tasks/Index.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
@@ -28,6 +29,7 @@ const App = () => {
                 path={url(routes.tasks.create)}
                 element={<TasksCreate />}
               />
+              <Route path={url(routes.tasks.edit)} element={<TasksEdit />} />
               <Route path="*" element={<h1>404 Not found</h1>} />
             </Route>
           </Routes>

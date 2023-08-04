@@ -2,7 +2,8 @@ import {
   BACKGROUND_COLOR_TYPES,
   TEXT_COLOR_TYPES,
 } from "../../utils/constants.js";
-import { Button, Card } from "../ui/index.js";
+import { routes, url } from "../../utils/routes.js";
+import { Button, ButtonLink, Card } from "../ui/index.js";
 
 const TaskCard = ({ task, onDelete }) => {
   return (
@@ -30,12 +31,12 @@ const TaskCard = ({ task, onDelete }) => {
       </div>
 
       <div className="flex gap-x-2 items-center mt-4">
-        <Button
+        <ButtonLink
           type={BACKGROUND_COLOR_TYPES.primary}
-          onClick={() => console.log(`Edit ${task._id}`)}
+          to={url(routes.tasks.edit, { id: task._id })}
         >
           Edit
-        </Button>
+        </ButtonLink>
         <Button
           type={BACKGROUND_COLOR_TYPES.danger}
           onClick={() => onDelete(task._id)}

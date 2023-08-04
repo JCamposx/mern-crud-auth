@@ -1,41 +1,56 @@
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Button, Header, Switcher } from "../../components/ui/index.js";
 import useTasks from "../../hooks/useTasks.js";
-import { BACKGROUND_COLOR_TYPES } from "../../utils/constants.js";
+import { BACKGROUND_COLOR_TYPES } from "../../utils/constants";
 import { routes, url } from "../../utils/routes.js";
 
-const TasksCreate = () => {
+const TasksEdit = () => {
+  const { id } = useParams();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
 
-  const { storeTask, errors: storeTaskErrors } = useTasks();
+  const { task, getTask, updateTask, errors: updateTaskErrors } = useTasks();
 
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
-    const hadSuccess = await storeTask(data);
+    const hadSuccess = await updateTask(id, data);
 
     if (hadSuccess) {
       navigate(url(routes.tasks.index));
     }
   });
 
+  useEffect(() => {
+    getTask(id);
+  }, []);
+
+  useEffect(() => {
+    setValue("title", task ? task.title : "");
+    setValue("description", task ? task.description : "");
+    setValue("deadline", task ? task.deadline : "");
+    setValue("done", task ? task.done : false);
+  }, [task]);
+
   return (
     <>
       <div className="flex justify-between items-center mb-6">
-        <Header>New task</Header>
+        <Header>Edit task</Header>
       </div>
 
       <div className="flex items-center justify-center">
         <div className="bg-zinc-800 w-96 max-w-md p-10 rounded-md">
-          {storeTaskErrors.length > 0 && (
+          {updateTaskErrors.length > 0 && (
             <div className="bg-red-500 p-2 rounded-md mb-4">
-              {storeTaskErrors.map((error, index) => (
+              {updateTaskErrors.map((error, index) => (
                 <p key={index}>{error}</p>
               ))}
             </div>
@@ -83,4 +98,4 @@ const TasksCreate = () => {
   );
 };
 
-export default TasksCreate;
+export default TasksEdit;
