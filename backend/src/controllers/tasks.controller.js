@@ -88,5 +88,5 @@ export const remove = async (req, res) => {
     return;
   }
 
-  res.sendStatus(204).json();
+  res.sendStatus(204);
 };
