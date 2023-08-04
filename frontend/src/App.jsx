@@ -4,6 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { persistor, store } from "./utils/store.js";
 
+import Navbar from "./components/Navbar.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Home from "./pages/Home.jsx";
 import TasksCreate from "./pages/Tasks/Create.jsx";
@@ -18,6 +19,8 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
+          <Navbar />
+
           <Routes>
             <Route path={url(routes.register)} element={<Register />} />
             <Route path={url(routes.login)} element={<Login />} />
