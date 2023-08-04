@@ -9,6 +9,7 @@ export const routes = {
     tasks: {
       index: "/tasks",
       store: "/tasks/store",
+      delete: "/tasks/:id",
     },
   },
   register: "/register",

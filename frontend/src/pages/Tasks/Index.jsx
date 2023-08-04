@@ -8,13 +8,17 @@ import { BACKGROUND_COLOR_TYPES } from "../../utils/constants.js";
 import { routes, url } from "../../utils/routes.js";
 
 const TasksIndex = () => {
-  const { tasks, errors, getAllTasks } = useTasks();
+  const { tasks, errors, getAllTasks, deleteTask } = useTasks();
 
   const flashMessage = useSelector((state) => state.flashMessage.message);
 
   useEffect(() => {
     getAllTasks();
   }, []);
+
+  const handleDeleteTask = (id) => {
+    deleteTask(id);
+  };
 
   return (
     <>
@@ -57,7 +61,7 @@ const TasksIndex = () => {
 
       <div className="grid grid-cols-3 gap-8 max-sm:grid-cols-1 max-md:grid-cols-1">
         {tasks.map((task) => (
-          <TaskCard task={task} key={task._id} />
+          <TaskCard key={task._id} task={task} onDelete={handleDeleteTask} />
         ))}
       </div>
     </>

@@ -4,7 +4,7 @@ import {
 } from "../../utils/constants.js";
 import { Button, Card } from "../ui/index.js";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, onDelete }) => {
   return (
     <Card>
       <div>
@@ -38,7 +38,7 @@ const TaskCard = ({ task }) => {
         </Button>
         <Button
           type={BACKGROUND_COLOR_TYPES.danger}
-          onClick={() => console.log(`Delete ${task._id}`)}
+          onClick={() => onDelete(task._id)}
         >
           Delete
         </Button>

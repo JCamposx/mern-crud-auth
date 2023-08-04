@@ -17,3 +17,12 @@ export const storeTask = async (data) => {
 
   return response;
 };
+
+export const deleteTask = async (id) => {
+  const response = await api(
+    url(routes.api.tasks.delete, { id }),
+    TYPE_FETCHING.delete
+  );
+
+  return response;
+};

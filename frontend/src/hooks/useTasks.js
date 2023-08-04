@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import {
+  deleteTask as deleteTaskRequest,
   getAllTasks as getAllTasksRequest,
   storeTask as storeTaskRequest,
 } from "../api/tasks.js";
@@ -68,7 +69,18 @@ const useTasks = () => {
     return response.success;
   };
 
-  return { tasks, errors, getAllTasks, storeTask };
+  const deleteTask = async (id) => {
+    const response = await deleteTaskRequest(id);
+
+    if (response.success) {
+      dispatchFlashMessageWithTimeout("Task deleted successfully", 5);
+      setTasks(tasks.filter((task) => task._id !== id));
+    } else {
+      setErrorsWithTimeout(response.errors, 5);
+    }
+  };
+
+  return { tasks, errors, getAllTasks, storeTask, deleteTask };
 };
 
 export default useTasks;
