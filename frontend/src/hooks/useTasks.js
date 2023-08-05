@@ -55,7 +55,7 @@ const useTasks = () => {
         deadline: response.data.task.deadline.substring(0, 10),
       });
     } else {
-      setErrors(errors.errors);
+      setErrorsWithTimeout(response.errors, 5);
     }
   };
 
