@@ -25,6 +25,14 @@ export const show = async (req, res) => {
     return;
   }
 
+  if (task.user.toString() !== req.user.id) {
+    responseErrorJson(res, {
+      status: 403,
+      message: "This is not your task",
+    });
+    return;
+  }
+
   responseSuccessJson(res, {
     task,
   });
@@ -51,8 +59,25 @@ export const store = async (req, res) => {
 export const update = async (req, res) => {
   const { title, description, deadline, done } = req.body;
 
-  const task = await Task.findByIdAndUpdate(
-    req.params.id,
+  const taskFound = await Task.findById(req.params.id);
+
+  if (!taskFound) {
+    responseErrorJson(res, {
+      status: 404,
+      message: "Task not found",
+    });
+  }
+
+  if (taskFound.user.toString() !== req.user.id) {
+    responseErrorJson(res, {
+      status: 403,
+      message: "This is not your task",
+    });
+    return;
+  }
+
+  const task = await taskFound.updateOne(
+    { id: req.params.id },
     {
       title,
       description,
@@ -63,14 +88,6 @@ export const update = async (req, res) => {
       new: true,
     }
   );
-
-  if (!task) {
-    responseErrorJson(res, {
-      status: 404,
-      message: "Task not found",
-    });
-    return;
-  }
 
   responseSuccessJson(res, {
     task,
