@@ -3,6 +3,21 @@ import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth.js";
 import { routes, url } from "../utils/routes.js";
 
+const routesList = [
+  {
+    title: "Home",
+    path: url(routes.home),
+  },
+  {
+    title: "My tasks",
+    path: url(routes.tasks.index),
+  },
+  {
+    title: "New task",
+    path: url(routes.tasks.create),
+  },
+];
+
 const NavbarItem = ({ path, title }) => {
   const { pathname } = useLocation();
 
@@ -65,11 +80,9 @@ const Navbar = () => {
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-zinc-900 md:dark:bg-zinc-800 dark:border-gray-700">
             {isAuthenticated ? (
-              <>
-                <NavbarItem path={url(routes.home)} title="Home" />
-                <NavbarItem path={url(routes.tasks.index)} title="My tasks" />
-                <NavbarItem path={url(routes.tasks.create)} title="New task" />
-              </>
+              routesList.map((route, index) => (
+                <NavbarItem key={index} path={route.path} title={route.title} />
+              ))
             ) : (
               <>
                 <NavbarItem path={url(routes.login)} title="Login" />
