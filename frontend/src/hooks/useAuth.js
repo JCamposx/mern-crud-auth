@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import loginRequest from "../api/auth/login.js";
 import registerRequest from "../api/auth/register.js";
+import logoutRequest from "../api/auth/logout.js";
 import verifyTokenRequest from "../api/auth/verifyToken.js";
 import {
   logout as logoutReducer,
@@ -58,7 +59,23 @@ const useAuth = () => {
     }
   };
 
-  return { isAuthenticated, signup, signin, verifyToken, errors };
+  const logout = async () => {
+    const response = await logoutRequest();
+
+    if (response.success) {
+      dispatch(logoutReducer());
+      persistor.purge();
+    } else {
+      setErrors(response.errors);
+
+      const timer = setTimeout(() => {
+        setErrors([]);
+        clearTimeout(timer);
+      }, 5000);
+    }
+  };
+
+  return { isAuthenticated, signup, signin, logout, verifyToken, errors };
 };
 
 export default useAuth;

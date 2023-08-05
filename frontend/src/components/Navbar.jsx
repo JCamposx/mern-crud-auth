@@ -3,22 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth.js";
 import { routes, url } from "../utils/routes.js";
 
-const routesList = [
-  {
-    title: "Home",
-    path: url(routes.home),
-  },
-  {
-    title: "My tasks",
-    path: url(routes.tasks.index),
-  },
-  {
-    title: "New task",
-    path: url(routes.tasks.create),
-  },
-];
-
-const NavbarItem = ({ path, title }) => {
+const NavbarItem = ({ path, title, onClick }) => {
   const { pathname } = useLocation();
 
   return (
@@ -31,6 +16,7 @@ const NavbarItem = ({ path, title }) => {
             ? "bg-blue-800 text-blue-500 max-md:text-white max-md:hover:bg-blue-800 font-bold"
             : "text-white hover:text-purple-500")
         }
+        onClick={onClick}
         aria-current="page"
       >
         {title}
@@ -40,7 +26,27 @@ const NavbarItem = ({ path, title }) => {
 };
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
+
+  const routesList = [
+    {
+      title: "Home",
+      path: url(routes.home),
+    },
+    {
+      title: "My tasks",
+      path: url(routes.tasks.index),
+    },
+    {
+      title: "New task",
+      path: url(routes.tasks.create),
+    },
+    {
+      title: "Logout",
+      path: "#",
+      onClick: () => logout(),
+    },
+  ];
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-zinc-800 select-none">
@@ -81,7 +87,12 @@ const Navbar = () => {
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-zinc-900 md:dark:bg-zinc-800 dark:border-gray-700">
             {isAuthenticated ? (
               routesList.map((route, index) => (
-                <NavbarItem key={index} path={route.path} title={route.title} />
+                <NavbarItem
+                  key={index}
+                  path={route.path}
+                  title={route.title}
+                  onClick={route.onClick}
+                />
               ))
             ) : (
               <>
